@@ -1,0 +1,57 @@
+name: dadban_lawyer_app
+description: Dadban - Offline-first lawyer assistant (Isar, OCR, Audio, Jalali calendar)
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # --- Local database (offline-first) ---
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+
+  # --- Paths & permissions ---
+  path_provider: ^2.1.3
+  permission_handler: ^11.3.1
+
+  # --- Audio: recording + playback + on-device STT ---
+  record: ^5.1.2
+  just_audio: ^0.9.39
+  speech_to_text: ^6.6.2
+
+  # --- Offline OCR (on-device) ---
+  google_mlkit_text_recognition: ^0.13.0
+
+  # --- Jalali calendar ---
+  table_calendar: ^3.1.2
+  shamsi_date: ^1.0.4
+
+  # --- State management ---
+  flutter_riverpod: ^2.5.1
+
+  # --- Networking / backend relay ---
+  dio: ^5.4.3+1
+
+  # --- Google Drive (backup) ---
+  google_sign_in: ^6.2.1
+
+  # --- Local notifications (deadlines) ---
+  flutter_local_notifications: ^17.2.1
+
+  http: ^1.2.1
+  path: ^1.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.11
+  isar_generator: ^3.1.0+1
+
+flutter:
+  uses-material-design: true
