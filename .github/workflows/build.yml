@@ -35,7 +35,7 @@ jobs:
           cd ..
           rm -rf temp_app
 
-      - name: Fix pubspec.yaml dependencies
+      - name: Create Clean pubspec.yaml
         run: |
           cat << 'EOF' > pubspec.yaml
           name: dadban
@@ -65,23 +65,26 @@ jobs:
             google_sign_in: ^6.2.1
             flutter_local_notifications: ^17.2.1
             image_picker: ^1.1.2
-            isar: 3.1.0+1
-            isar_flutter_libs: 3.1.0+1
             http: ^1.2.1
             path: ^1.9.0
 
           dev_dependencies:
             flutter_test:
               sdk: flutter
-            flutter_lints: ^3.0.0
 
           flutter:
             uses-material-design: true
           EOF
 
-      - name: Auto-patch Code Errors
+      - name: Auto-fix Dart Source Code
         run: |
-          # اصلاح پارامترهای تقویم
+          # 1. حذف خطوط part '*.g.dart' از مدل‌ها تا خطای نبود فایل ندهد
+          find lib/ -name "*.dart" -exec sed -i '/part.*\.g\.dart/d' {} +
+          find lib/ -name "*.dart" -exec sed -i '/@collection/d' {} +
+          find lib/ -name "*.dart" -exec sed -i '/@Collection()/d' {} +
+          find lib/ -name "*.dart" -exec sed -i '/package:isar\/isar\.dart/d' {} +
+
+          # 2. اصلاح خطاهای ویجت تقویم
           if [ -f "lib/ui/calendar_screen.dart" ]; then
             sed -i '/daysOfWeekLabels:/d' lib/ui/calendar_screen.dart
             sed -i '/monthNames:/d' lib/ui/calendar_screen.dart
