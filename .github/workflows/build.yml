@@ -74,8 +74,6 @@ jobs:
             flutter_test:
               sdk: flutter
             flutter_lints: ^3.0.0
-            build_runner: 2.4.6
-            isar_generator: 3.1.0+1
 
           flutter:
             uses-material-design: true
@@ -83,7 +81,7 @@ jobs:
 
       - name: Auto-patch Code Errors
         run: |
-          # رفع خطای پارامترهای ناشناخته تقویم
+          # اصلاح پارامترهای تقویم
           if [ -f "lib/ui/calendar_screen.dart" ]; then
             sed -i '/daysOfWeekLabels:/d' lib/ui/calendar_screen.dart
             sed -i '/monthNames:/d' lib/ui/calendar_screen.dart
@@ -91,9 +89,6 @@ jobs:
 
       - name: Get Dependencies
         run: flutter pub get
-
-      - name: Generate Database Code (Isar)
-        run: dart run build_runner build --delete-conflicting-outputs
 
       - name: Build Release APK
         run: flutter build apk --release --no-tree-shake-icons
